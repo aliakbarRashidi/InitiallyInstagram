@@ -24,8 +24,15 @@ class ProfileViewController: UIViewController {
     
     
     @IBAction func onLogout(sender: AnyObject) {
-            PFUser.logOut()
-           // self.tabBarController?.popoverPresentationController(true)
+        PFUser.logOutInBackgroundWithBlock { (error: NSError?) -> Void in
+            if let error = error {
+                print("Error while trying to logout: \(error)")
+            } else {
+                NSNotificationCenter.defaultCenter().postNotificationName(userDidLogoutNotification, object: nil)
+            }
+        }
+
+        
         
     }
 
