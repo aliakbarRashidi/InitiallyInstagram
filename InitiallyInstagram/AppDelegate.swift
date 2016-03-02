@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        UITabBar.appearance().tintColor = UIColor(red: 255/255.0, green: 255/255.0, blue: 255/255.0, alpha: 1.0)
         // Override point for customization after application launch.
         Parse.initializeWithConfiguration(
             ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
@@ -36,7 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let currentUser = PFUser.currentUser() {
             print("Logged in user detected: \(currentUser.username!)")
             
-            let vc = storyboard.instantiateViewControllerWithIdentifier("tabBarController") as UIViewController
+            let vc = storyboard.instantiateViewControllerWithIdentifier("tabBarController") as
+            UIViewController
             window?.rootViewController = vc
             
         } else {

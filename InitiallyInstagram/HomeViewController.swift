@@ -21,7 +21,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableView.estimatedRowHeight = 350
+        self.tableView.estimatedRowHeight = 100
+        self.tableView.separatorStyle = .None
         self.tableView.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
     }
@@ -38,11 +39,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     print("Successfully retrieved \(results.count) posts")
                     
                     self.picsPlusCaption = results
-                    for l in self.picsPlusCaption! {
+                    /*(for l in self.picsPlusCaption! {
                         print(l["caption"])
                         print(l["picture"])
-                    }
+                    }*/
                     self.tableView.reloadData()
+                    self.tableView.separatorStyle = .None
                 } else {
                     print("No results returned")
                 }
@@ -75,12 +77,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
+
+           // picsPlusCaption.removeAtIndex(indexPath.row)
             //need to add in delete from parse inside here
         }
     }
 
-    
-    
 
     /*
     // MARK: - Navigation
