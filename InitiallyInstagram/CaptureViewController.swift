@@ -27,8 +27,21 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func takeAPhoto(sender: AnyObject) {
+        let cameraSource = UIImagePickerController.isSourceTypeAvailable(.Camera)
+        
+        // Limit to PhotoLibrary if no camera available
+        let sourceType = cameraSource ? UIImagePickerControllerSourceType.Camera : UIImagePickerControllerSourceType.PhotoLibrary
+        
+        let viewController = UIImagePickerController()
+        viewController.delegate = self
+        viewController.sourceType = sourceType
+        
+        self.presentViewController(viewController, animated: true, completion: nil)
+    }
     
     @IBAction func selectAPhoto(sender: UIButton) {
+        
         let picker = UIImagePickerController ()
         picker.delegate = self
         picker.sourceType = .PhotoLibrary
@@ -47,12 +60,17 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBAction func addPhotoAndCaption(sender: AnyObject)
     {
-        let imageData = UIImageJPEGRepresentation(pictureView.image!, 0)
+        
+        let currentUser = PFUser.currentUser()
+        
+        let scaledImage = self.resize( self.pictureView.image!, newSize: CGSizeMake(750, 750))
+        let imageData = UIImageJPEGRepresentation(scaledImage, 0)
         let imageFile = PFFile(name:"image.jpg", data:imageData!)
         let picture = PFObject(className: "Picture")
         picture["image"] = imageFile
         
         let post = PFObject(className: "Post")
+        post["user"] = currentUser
         post["picture"] = picture
         post["caption"] = self.captionField.text
         post.saveInBackgroundWithBlock
@@ -63,7 +81,7 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
             } else
             {
                 print("Post saved successfully")
-                self.tabBarController!.selectedIndex = 0;
+                self.tabBarController!.selectedIndex = 0
             }
         }
 
@@ -73,6 +91,17 @@ class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
 
 
+    func resize(image: UIImage, newSize: CGSize) -> UIImage {
+        let resizeImageView = UIImageView(frame: CGRectMake(0, 0, newSize.width, newSize.height))
+        resizeImageView.contentMode = UIViewContentMode.ScaleAspectFill
+        resizeImageView.image = image
+        
+        UIGraphicsBeginImageContext(resizeImageView.frame.size)
+        resizeImageView.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+    }
     
 
     // MARK: - Navigation

@@ -19,16 +19,24 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.estimatedRowHeight = 100
-        self.tableView.separatorStyle = .None
-        self.tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        
+        tableView.estimatedRowHeight = 100
+        tableView.separatorStyle = .None
+        tableView.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(animated: Bool) {
+        
+        // [query whereKey:@"UserID" equalTo:@"user"];
+
+        let currentUser = PFUser.currentUser()
         let query = PFQuery(className: "Post")
+        query.whereKey("user", equalTo: currentUser!)
+        
         query.orderByDescending("createdAt")
         query.includeKey("picture")
         query.findObjectsInBackgroundWithBlock { (results: [PFObject]?, error: NSError?) -> Void in
@@ -36,9 +44,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print("Error: \(error)")
             } else {
                 if let results = results {
-                    print("Successfully retrieved \(results.count) posts")
                     
                     self.picsPlusCaption = results
+                    
+                     print("Successfully retrieved \(results.count) posts")
                     /*(for l in self.picsPlusCaption! {
                         print(l["caption"])
                         print(l["picture"])
@@ -82,6 +91,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             //need to add in delete from parse inside here
         }
     }
+    
+    
 
 
     /*
