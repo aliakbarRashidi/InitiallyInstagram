@@ -11,7 +11,7 @@ import Parse
 
 class CaptureViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    
+ 
     @IBOutlet weak var captionField: UITextField!
     @IBOutlet weak var pictureView: UIImageView!
     
