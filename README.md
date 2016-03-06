@@ -2,7 +2,7 @@
 
 **InitiallyInstagram** is a photo sharing app using Parse as its backend.
 
-Time spent: **5 (Still in progress)** hours spent in total
+Time spent: **15** hours spent in total
 
 ## User Storiess
 
@@ -10,9 +10,9 @@ The following **required** functionality is completed:
 
 - [X] User can sign up to create a new account using Parse authentication
 - [X] User can log in and log out of his or her account
-- [ ] The current signed in user is persisted across app restarts
-- [ ] User can take a photo, add a caption, and post it to "Instagram"
-- [ ] User can view the last 20 posts submitted to "Instagram"
+- [X] The current signed in user is persisted across app restarts
+- [X] User can take a photo, add a caption, and post it to "Instagram"
+- [X] User can view the last 20 posts submitted to "Instagram"
 
 The following **optional** features are implemented:
 
@@ -26,6 +26,8 @@ The following **optional** features are implemented:
 The following **additional** features are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality!
+- [X] Created error code labels
+- [X] Created sign up label to notify when a user does sign up
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
@@ -36,7 +38,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://i.imgur.com/wck6m5e.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
